@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class PetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin,staff');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -23,8 +28,7 @@ class PetController extends Controller
      */
     public function create()
     {
-        $owners = User::role('client')->where('is_active', true)->get();
-        return view('admin.pets.create', compact('owners'));
+        return view('admin.pets.create');
     }
 
     /**
@@ -62,8 +66,7 @@ class PetController extends Controller
      */
     public function edit(Pet $pet)
     {
-        $owners = User::role('client')->where('is_active', true)->get();
-        return view('admin.pets.edit', compact('pet', 'owners'));
+        return view('admin.pets.edit', compact('pet'));
     }
 
     /**

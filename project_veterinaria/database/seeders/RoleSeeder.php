@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
         
         // Crear en la BD los roles
         foreach($roles as $role){
-            Role::create([
+            Role::firstOrCreate([
                 'name' => $role,
                 'guard_name' => 'web'
             ]);

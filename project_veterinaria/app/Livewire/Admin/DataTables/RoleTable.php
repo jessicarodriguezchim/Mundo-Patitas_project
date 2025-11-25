@@ -4,7 +4,7 @@ namespace App\Livewire\Admin\DataTables;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 
 class RoleTable extends DataTableComponent
 {
@@ -40,3 +40,4 @@ class RoleTable extends DataTableComponent
         ];
     }
 }
+

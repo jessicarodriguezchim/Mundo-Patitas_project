@@ -13,10 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Llamar a los seeders
+        // Llamar a los seeders en orden
         $this->call([
-            RoleSeeder::class,
-            UserSeeder::class,
+            RoleSeeder::class,    // Primero crear los roles
+            UserSeeder::class,    // Luego crear los usuarios
+            PetSeeder::class,     // Finalmente crear las mascotas
         ]);
     }
 }

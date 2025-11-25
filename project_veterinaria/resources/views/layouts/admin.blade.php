@@ -20,7 +20,7 @@
         <wireui:scripts />
         @livewireStyles
     </head>
-    <body class="font-sans antialiased bg-gray-50">
+    <body class="font-sans antialiased bg-pastel-gray-light">
         @include('layouts.includes.admin.navigation')
         @include('layouts.includes.admin.sidebar')
 
@@ -39,6 +39,7 @@
         </div>
 
         @stack('modals')
+        @stack('scripts')
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 

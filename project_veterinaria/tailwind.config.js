@@ -57,6 +57,34 @@ export default {
 
             },
 
+            colors: {
+
+                // Colores principales pastel
+                'pastel-aqua': '#AEE6E6',      // Aguamarina suave
+                'pastel-pink': '#F7C8D0',     // Rosa pastel
+                
+                // Colores secundarios
+                'pastel-peach': '#FFDCC2',    // Melocotón suave
+                'pastel-yellow': '#FFF7AE',   // Amarillo pastel
+                
+                // Neutros
+                'pastel-gray-light': '#F4F4F4', // Gris muy claro
+                'pastel-gray-text': '#6F6F6F',  // Gris suave para texto
+            },
+
+            borderRadius: {
+
+                'soft': '12px',      // Bordes redondeados suaves
+                'soft-lg': '16px',   // Bordes redondeados grandes
+            },
+
+            boxShadow: {
+
+                'soft': '0 2px 8px rgba(174, 230, 230, 0.15)',      // Sombra suave aguamarina
+                'soft-pink': '0 2px 8px rgba(247, 200, 208, 0.15)', // Sombra suave rosa
+                'soft-lg': '0 4px 16px rgba(174, 230, 230, 0.12)',  // Sombra suave grande
+            },
+
         },
 
     },

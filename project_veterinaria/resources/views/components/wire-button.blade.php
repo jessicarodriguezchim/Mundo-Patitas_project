@@ -12,20 +12,26 @@
 ])
 
 @php
-    // Determine color classes
+    // Determine color classes - usando paleta pastel tierna
     $colorClasses = '';
     if ($blue) {
-        $colorClasses = 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500';
+        // Botón principal: aguamarina suave
+        $colorClasses = 'bg-pastel-aqua hover:bg-[#8FD9D9] focus:ring-pastel-aqua/50 text-white shadow-soft hover:shadow-soft-lg';
     } elseif ($red) {
-        $colorClasses = 'bg-red-600 hover:bg-red-700 focus:ring-red-500';
+        // Botón de acción destructiva: rosa pastel más intenso
+        $colorClasses = 'bg-pastel-pink hover:bg-[#F5B5C0] focus:ring-pastel-pink/50 text-white shadow-soft-pink hover:shadow-soft-lg';
     } elseif ($green) {
-        $colorClasses = 'bg-green-600 hover:bg-green-700 focus:ring-green-500';
+        // Botón de éxito: aguamarina con toque verde
+        $colorClasses = 'bg-pastel-aqua hover:bg-[#8FD9D9] focus:ring-pastel-aqua/50 text-white shadow-soft hover:shadow-soft-lg';
     } elseif ($yellow) {
-        $colorClasses = 'bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-500';
+        // Botón de advertencia: amarillo pastel
+        $colorClasses = 'bg-pastel-yellow hover:bg-[#FFF59E] focus:ring-pastel-yellow/50 text-pastel-gray-text shadow-soft hover:shadow-soft-lg';
     } elseif ($purple) {
-        $colorClasses = 'bg-purple-600 hover:bg-purple-700 focus:ring-purple-500';
+        // Botón secundario: melocotón suave
+        $colorClasses = 'bg-pastel-peach hover:bg-[#FFD0A8] focus:ring-pastel-peach/50 text-pastel-gray-text shadow-soft hover:shadow-soft-lg';
     } else {
-        $colorClasses = 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500';
+        // Botón por defecto: gris suave
+        $colorClasses = 'bg-pastel-gray-text/20 hover:bg-pastel-gray-text/30 focus:ring-pastel-gray-text/30 text-pastel-gray-text shadow-soft hover:shadow-soft-lg';
     }
     
     // Determine size classes
@@ -40,7 +46,7 @@
         $sizeClasses = 'px-4 py-2 text-sm';
     }
     
-    $baseClasses = 'inline-flex items-center justify-center border border-transparent rounded-md font-semibold text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150';
+    $baseClasses = 'inline-flex items-center justify-center border border-transparent rounded-soft font-semibold uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 transition-all ease-in-out duration-200';
     $classes = "$baseClasses $colorClasses $sizeClasses";
 @endphp
 

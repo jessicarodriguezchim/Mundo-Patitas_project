@@ -1,5 +1,5 @@
 <x-admin-layout
-    title="Roles | MediConnect"
+    title="Roles | Mundo Patitas"
     :breadcrumbs="[
         ['name' => 'Dashboard',
         'href' => route('admin.dashboard')

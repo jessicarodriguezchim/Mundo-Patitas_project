@@ -8,3 +8,65 @@
 [x-cloak] {
     display: none;
 }
+
+/* Estilos personalizados para paleta pastel tierna */
+@layer components {
+    /* Bordes redondeados suaves para todos los elementos */
+    .rounded-soft {
+        border-radius: 12px;
+    }
+    
+    .rounded-soft-lg {
+        border-radius: 16px;
+    }
+    
+    /* Sombras suaves */
+    .shadow-soft {
+        box-shadow: 0 2px 8px rgba(174, 230, 230, 0.15);
+    }
+    
+    .shadow-soft-pink {
+        box-shadow: 0 2px 8px rgba(247, 200, 208, 0.15);
+    }
+    
+    .shadow-soft-lg {
+        box-shadow: 0 4px 16px rgba(174, 230, 230, 0.12);
+    }
+    
+    /* Cards con estilo pastel */
+    .card-pastel {
+        @apply bg-white rounded-soft-lg shadow-soft p-6;
+        border: 1px solid rgba(174, 230, 230, 0.2);
+    }
+    
+    /* Inputs con estilo pastel */
+    .input-pastel {
+        @apply rounded-soft shadow-soft;
+        border: 1px solid rgba(174, 230, 230, 0.3);
+    }
+    
+    .input-pastel:focus {
+        border-color: #AEE6E6;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(174, 230, 230, 0.2);
+    }
+    
+    /* Badges pastel */
+    .badge-pastel-aqua {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+        background-color: rgba(174, 230, 230, 0.2);
+        color: #AEE6E6;
+    }
+    
+    .badge-pastel-pink {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+        background-color: rgba(247, 200, 208, 0.2);
+        color: #F7C8D0;
+    }
+    
+    .badge-pastel-peach {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+        background-color: rgba(255, 220, 194, 0.2);
+        color: #FFDCC2;
+    }
+}

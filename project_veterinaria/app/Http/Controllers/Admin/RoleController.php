@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -62,13 +67,14 @@ class RoleController extends BaseController
      */
     public function edit(Role $role)
     {
-        //Restringir la acción para los primeros 4 roles fijos
-        if ($role->id <=4){
+        // Restringir la acción para los roles del sistema (admin, staff, client)
+        $protectedRoles = ['admin', 'staff', 'client'];
+        if (in_array($role->name, $protectedRoles)) {
             //Variable de un solo uso 
             session()->flash('swal',[
                 'icon' => 'error',
                 'title' => 'Acción no permitida',
-                'text' => 'No puedes editar este rol.',
+                'text' => 'No puedes editar este rol del sistema.',
             ]);
             return redirect()->route('admin.roles.index');
         }
@@ -114,13 +120,14 @@ class RoleController extends BaseController
      */
     public function destroy(Role $role)
     {
-        //Restringir la acción para los primeros 4 roles fijos
-        if ($role->id <=4){
+        // Restringir la acción para los roles del sistema (admin, staff, client)
+        $protectedRoles = ['admin', 'staff', 'client'];
+        if (in_array($role->name, $protectedRoles)) {
             //Variable de un solo uso 
             session()->flash('swal',[
                 'icon' => 'error',
                 'title' => 'Acción no permitida',
-                'text' => 'No puedes eliminar este rol.',
+                'text' => 'No puedes eliminar este rol del sistema.',
             ]);
             return redirect()->route('admin.roles.index');
         }

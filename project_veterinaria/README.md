@@ -1,223 +1,377 @@
-Configuración del proyecto
+# 🐾 Mundo Patitas - Sistema de Gestión Veterinaria
 
-1. Integración con MySQL
+Sistema de gestión completo para clínicas veterinarias desarrollado con Laravel 12, que incluye autenticación, gestión de roles, usuarios y módulo de mascotas (Pets) con CRUD completo.
 
-Archivo de configuración: .env
+## 📋 Tabla de Contenidos
 
-DB_CONNECTION=mysql ---> cambio
+- [Características](#-características)
+- [Requisitos del Sistema](#-requisitos-del-sistema)
+- [Instalación](#-instalación)
+- [Configuración](#-configuración)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Roles y Permisos](#-roles-y-permisos)
+- [Uso del Sistema](#-uso-del-sistema)
+- [Tecnologías Utilizadas](#-tecnologías-utilizadas)
+- [Estructura de Base de Datos](#-estructura-de-base-de-datos)
+- [Contribuir](#-contribuir)
+- [Licencia](#-licencia)
+
+## ✨ Características
+
+### 🔐 Autenticación
+- ✅ Registro y login de usuarios con Laravel Jetstream
+- ✅ Logout funcional
+- ✅ Redirección automática a dashboard según rol
+- ✅ Verificación de email
+- ✅ Gestión de sesiones
+
+### 👥 Gestión de Roles
+- ✅ Sistema de roles con Spatie Permission
+- ✅ Tres roles principales:
+  - **Admin**: Acceso completo al sistema
+  - **Staff**: Gestión de módulos del dominio (mascotas)
+  - **Client**: Acceso limitado a su propia información
+- ✅ Protección de rutas mediante middleware personalizado
+- ✅ Asignación de roles desde panel administrativo
+
+### 👤 Gestión de Usuarios
+- ✅ Listado paginado de usuarios
+- ✅ Creación de nuevos usuarios con asignación de rol
+- ✅ Edición de datos básicos (nombre, email, rol, estado)
+- ✅ Desactivación de usuarios (soft delete)
+- ✅ Filtrado por rol y estado
+
+### 🐕 Módulo de Mascotas (CRUD Completo)
+- ✅ Listado de mascotas con paginación
+- ✅ Creación de nuevas mascotas
+- ✅ Edición de información de mascotas
+- ✅ Visualización detallada
+- ✅ Eliminación de mascotas
+- ✅ Asociación con dueño (cliente)
+- ✅ Restricción por rol (solo admin/staff pueden gestionar)
+
+## 🖥️ Requisitos del Sistema
+
+- PHP >= 8.2
+- Composer
+- Node.js >= 18.x y npm
+- MySQL >= 8.0 o PostgreSQL
+- Git
+
+## 📦 Instalación
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tu-usuario/mundo-patitas.git
+cd mundo-patitas
+```
+
+### 2. Instalar dependencias de PHP
+
+```bash
+composer install
+```
+
+### 3. Instalar dependencias de Node.js
+
+```bash
+npm install
+```
+
+### 4. Configurar el archivo de entorno
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Edita el archivo `.env` con tus credenciales de base de datos:
+
+```env
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=doctor_appointments ---> cambio
-DB_USERNAME=usuario
-DB_PASSWORD=contraseña
+DB_DATABASE=mundo_patitas
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
 
+### 5. Ejecutar migraciones y seeders
 
-Migraciones: Se ejecutaron las migraciones para crear las tablas necesarias:
-
-    - php artisan migrate
-
-Cómo verificar
-    - Abrir MySQL Workbench o cliente de MySQL.
-    - Conectarse a la base de datos configurada (doctor_appointments-app-4b).
-    - Verificar que existan las tablas creadas por Laravel (users, appointments, etc.).
-    
------------------------------------------------------------------------------------------------------------------------------------------------------
-2. Configuración técnica básica
-
-Idioma del sistema: Español
-Modificado en config/app.php:
-
-'locale' => 'es',
------------------------------------------------------------------------------------------------------------------------------------------------------
-
-3. Zona horaria (config/app.php/linea 68)
-'timezone' => 'UTC' cambia a 'timezone' => 'America/Merida',
-
------------------------------------------------------------------------------------------------------------------------------------------------------
-4. Cambio de foto de perfil:
-Se reemplazó la foto de perfil por la nueva imagen en public/images/profile.jpg y se actualizó en la vista correspondiente.
-
-    *Cómo verificar
-- Ejecutar el servidor de Laravel -> php artisan serve
-- Abrir la aplicación en el navegador y revisar:
-        - La interfaz y mensajes del sistema aparecen en español.
-        - La fecha y hora reflejan la zona horaria configurada.
-        - La foto de perfil se muestra correctamente en el área del usuario.
-
-# Panel administrativo con Flowbite
-
-## 5. Página principal de Flowbite
-Fuimos a la página principal de **Flowbite**, que es una biblioteca de componentes UI basada en **TailwindCSS**.  
-Buscamos **Sidebar → Sidebar with navbar #**, encontramos una plantilla y revisamos el código.
------------------------------------------------------------------------------------------------------------------------------------------------------
-## 6. Estructura inicial
-Vamos a la carpeta `resources/views/component/admin-layout.blade.php` y la movemos a una nueva carpeta llamada **Layouts**, en la cual se tienen tres archivos:
-
-- `admin-layout.blade.php` → se cambia el nombre a **admin.blade.php**.
-- `app.blade.php` → copiamos todo el contenido y lo pegamos en **admin.blade.php**, pero eliminamos de la línea 21 a la 40 (`<body>` hasta `@stack('modals')`).
-- `guest.blade.php`.
------------------------------------------------------------------------------------------------------------------------------------------------------
-## 7. Crear componente
 ```bash
-php artisan make:component AdminLayout
+php artisan migrate
+php artisan db:seed
+```
 
-8. Rutas
-En la carpeta routes:
+### 6. Compilar assets
 
-admin.php → modificamos para que quede:
-
-php
-Copiar código
-return view('admin.dashboard')->name('dashboard');
-api.php
-
-console.php
-
-web.php
------------------------------------------------------------------------------------------------------------------------------------------------------
-9. Views
-En views se crea una nueva carpeta admin con el archivo:
-
-dashboard.blade.php → colocamos el componente o plantilla:
-
-blade
-Copiar código
-<x-admin-layout></x-admin-layout>
------------------------------------------------------------------------------------------------------------------------------------------------------
-10. Sidebar
-Entramos a la página oficial:
-flowbite.com/docs/components/sidebar/#sidebar-with-navbar
-
-Copiamos el contenido de Sidebar with navbar # y lo pegamos dentro de admin.blade.php a partir de la línea 21 (aprox. 200 líneas de código).
-
-En la terminal ejecutamos:
-
-bash
-Copiar código
-php artisan serve
-El paquete que se encarga de la autenticación es Laravel Fortify (en Spring sería Spring Security).
------------------------------------------------------------------------------------------------------------------------------------------------------
-11. Modificar AdminLayout.php
-En app/View/Components/AdminLayout.php modificamos la línea 24 con:
-
-php
-Copiar código
-return view('layouts.admin');
-Esto hace que la página se vea incompleta.
-En la terminal ejecutamos:
-
-bash
-Copiar código
-npm install
+```bash
 npm run build
------------------------------------------------------------------------------------------------------------------------------------------------------
-12. Organización de carpetas
-Creamos nuevas carpetas para organizar los elementos a renderizar:
+# O para desarrollo con hot reload:
+npm run dev
+```
 
-markdown
-Copiar código
-layouts
- └── includes
-     ├── admin
-     │   ├── navigation.blade.php
-     │   └── sidebar.blade.php
-     └── app
------------------------------------------------------------------------------------------------------------------------------------------------------
-13. Navigation
-En resources/layouts/admin.blade.php, de la línea 21 a la 72 cortamos y pegamos en el archivo navigation.blade.php.
------------------------------------------------------------------------------------------------------------------------------------------------------
-14. Incluir navigation
-En admin.blade.php, en la línea 22, agregamos:
+### 7. Iniciar el servidor
 
-blade
-Copiar código
-@include('layouts.includes.admin.navigation')
------------------------------------------------------------------------------------------------------------------------------------------------------
-15. Incluir sidebar
-Repetimos el mismo proceso con el aside (línea 24 a 90).
-Cortamos y pegamos en sidebar.blade.php y lo llamamos en admin.blade.php:
+```bash
+php artisan serve
+```
 
-blade
-Copiar código
-@include('layouts.includes.admin.sidebar')
------------------------------------------------------------------------------------------------------------------------------------------------------
-16. Contenedor vacío
-Eliminamos los estilos desde la línea 27 hasta la 125, dejando:
+El sistema estará disponible en: `http://localhost:8000`
 
-html
-Copiar código
-<div class="p-4 sm:ml-64"></div>
-Agregamos:
+## ⚙️ Configuración
 
-html
-Copiar código
-<div class="mt-14">Hola mundo</div>
-{{$slot}}
------------------------------------------------------------------------------------------------------------------------------------------------------
-17. Dashboard
-En dashboard.blade.php colocamos:
+### Usuarios de Prueba
 
-blade
-Copiar código
-Hola desde admin
------------------------------------------------------------------------------------------------------------------------------------------------------
-18. Fondo y Flowbite
-En admin.blade.php, en la línea 20, modificamos el <body>:
+Después de ejecutar los seeders, puedes iniciar sesión con:
 
-html
-Copiar código
-<body class="font-sans antialiased bg-gray-50">
-Instalamos Flowbite:
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Admin | admin@mundopatitas.com | password |
+| Staff | staff1@mundopatitas.com | password |
+| Client | client1@mundopatitas.com | password |
 
-bash
-Copiar código
-npm install flowbite --save
------------------------------------------------------------------------------------------------------------------------------------------------------
-19. CSS y Script
-En resources/css/app.css agregamos:
+### Configuración de Roles
 
-css
-Copiar código
-/* Flowbite */
-@import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../../node_modules/flowbite";
+Los roles se crean automáticamente al ejecutar `php artisan db:seed`. Los roles disponibles son:
 
-[x-cloak] {
-    display: none;
-}
-En admin.blade.php, en la línea 35, añadimos:
+- `admin`: Administrador del sistema
+- `staff`: Personal de la clínica
+- `client`: Cliente/Dueño de mascotas
 
-html
-Copiar código
-<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
------------------------------------------------------------------------------------------------------------------------------------------------------
-20. Navigation-menu
-En navigation-menu.blade.php:
-En la opción Settings Dropdown (línea 74 a 124), cortamos y pegamos en navigation.blade.php, eliminando y sustituyendo el bloque de la línea 17 a la 48.
------------------------------------------------------------------------------------------------------------------------------------------------------
-21. Plantilla en profile
-En el archivo show.blade.php de profile, reemplazamos app por admin:
+## 📁 Estructura del Proyecto
 
-blade
-Copiar código
-<x-admin-layout></x-admin-layout>
------------------------------------------------------------------------------------------------------------------------------------------------------
-22. Redirección y logo
-Modificamos:
+```
+project_veterinaria/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/
+│   │   │   │   ├── PetController.php      # CRUD de mascotas
+│   │   │   │   ├── RoleController.php     # Gestión de roles
+│   │   │   │   └── UserController.php     # Gestión de usuarios
+│   │   │   └── Client/
+│   │   │       ├── PetController.php      # Vista de mascotas para clientes
+│   │   │       └── ProfileController.php  # Perfil de cliente
+│   │   └── Middleware/
+│   │       └── EnsureUserHasRole.php     # Middleware de roles
+│   ├── Livewire/
+│   │   └── Admin/
+│   │       └── DataTables/                # Componentes Livewire Tables
+│   ├── Models/
+│   │   ├── Pet.php                        # Modelo de Mascotas
+│   │   ├── Role.php
+│   │   └── User.php
+│   └── View/
+│       └── Components/
+├── database/
+│   ├── factories/
+│   │   ├── PetFactory.php                 # Factory para mascotas
+│   │   └── UserFactory.php                # Factory para usuarios
+│   ├── migrations/
+│   │   ├── create_users_table.php
+│   │   ├── create_pets_table.php
+│   │   └── create_permission_tables.php
+│   └── seeders/
+│       ├── DatabaseSeeder.php
+│       ├── RoleSeeder.php                 # Crea los roles
+│       └── UserSeeder.php                 # Crea usuarios de prueba
+├── resources/
+│   ├── views/
+│   │   ├── admin/                         # Vistas del panel admin
+│   │   │   ├── pets/                      # CRUD de mascotas
+│   │   │   ├── users/                     # CRUD de usuarios
+│   │   │   └── roles/                     # CRUD de roles
+│   │   ├── client/                        # Vistas para clientes
+│   │   └── layouts/
+│   │       └── includes/
+│   │           └── admin/
+│   │               ├── sidebar.blade.php
+│   │               └── navigation.blade.php
+│   └── css/
+│       └── app.css                        # Estilos con paleta pastel
+├── routes/
+│   ├── admin.php                          # Rutas del panel admin
+│   ├── web.php                            # Rutas públicas y cliente
+│   └── api.php
+└── tailwind.config.js                     # Configuración Tailwind con colores pastel
+```
 
-html
-Copiar código
-<a href="/" class="flex ms-2 md:me-24">
-para redirigir a la página principal ("Hola desde admin").
+## 🔒 Roles y Permisos
 
-Finalmente, cambiamos el logo por una imagen diferente en la carpeta public se creo una nueva acrpeta llamada images y se agrega una nueva imagen y se llama en  <img src="{{ asset('images/logo.png') }}" class="h-8 me-3" alt="Mi Logo" />
+### Admin
+- ✅ Acceso completo al dashboard
+- ✅ Gestión de usuarios (crear, editar, desactivar)
+- ✅ Gestión de roles
+- ✅ Gestión completa de mascotas
 
+### Staff
+- ✅ Acceso al dashboard
+- ✅ Gestión de mascotas (crear, editar, eliminar)
+- ❌ No puede gestionar usuarios ni roles
 
+### Client
+- ✅ Ver su propio perfil
+- ✅ Ver sus propias mascotas
+- ❌ No puede acceder al panel administrativo
+- ❌ No puede gestionar otras mascotas
 
+## 🎨 Paleta de Colores
 
+El sistema utiliza una paleta de colores pastel tierna y bonita:
 
+- **Aguamarina suave** (#AEE6E6): Botones principales
+- **Rosa pastel** (#F7C8D0): Botones secundarios
+- **Melocotón suave** (#FFDCC2): Acentos
+- **Amarillo pastel** (#FFF7AE): Detalles
+- **Gris muy claro** (#F4F4F4): Fondos
+- **Gris suave** (#6F6F6F): Textos
 
-    
+## 🗄️ Estructura de Base de Datos
 
+### Tabla: users
+- `id`: Identificador único
+- `name`: Nombre del usuario
+- `email`: Email único
+- `password`: Contraseña encriptada
+- `id_number`: Número de identificación
+- `phone`: Teléfono
+- `address`: Dirección
+- `is_active`: Estado activo/inactivo
+- `email_verified_at`: Fecha de verificación
+- `timestamps`: created_at, updated_at
 
+### Tabla: pets
+- `id`: Identificador único
+- `name`: Nombre de la mascota
+- `species`: Especie (Perro, Gato, etc.)
+- `breed`: Raza (opcional)
+- `age`: Edad (opcional)
+- `owner_id`: ID del dueño (FK a users)
+- `notes`: Notas adicionales
+- `timestamps`: created_at, updated_at
+
+### Tabla: roles (Spatie Permission)
+- `id`: Identificador único
+- `name`: Nombre del rol
+- `guard_name`: Guard (web)
+- `timestamps`: created_at, updated_at
+
+## 🚀 Uso del Sistema
+
+### Acceso como Administrador
+
+1. Inicia sesión con: `admin@mundopatitas.com` / `password`
+2. Accede al dashboard en `/admin`
+3. Desde el sidebar puedes:
+   - Gestionar usuarios en "Usuarios"
+   - Gestionar roles en "Roles y Permisos"
+   - Gestionar mascotas en "Mascotas"
+
+### Acceso como Staff
+
+1. Inicia sesión con: `staff1@mundopatitas.com` / `password`
+2. Accede al dashboard en `/admin`
+3. Puedes gestionar mascotas pero no usuarios ni roles
+
+### Acceso como Cliente
+
+1. Inicia sesión con: `client1@mundopatitas.com` / `password`
+2. Serás redirigido a `/client/pets`
+3. Puedes ver tu perfil y tus mascotas
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Laravel 12**: Framework PHP
+- **Laravel Jetstream**: Autenticación y scaffolding
+- **Laravel Sanctum**: Autenticación API
+- **Spatie Laravel Permission**: Gestión de roles y permisos
+- **Livewire 3**: Componentes interactivos
+- **Laravel Livewire Tables**: Tablas dinámicas
+- **Tailwind CSS 3**: Framework CSS
+- **Flowbite**: Componentes UI
+- **WireUI**: Componentes adicionales
+- **Vite**: Build tool
+- **MySQL**: Base de datos
+
+## 📝 Buenas Prácticas Implementadas
+
+- ✅ Rutas organizadas con `Route::resource`
+- ✅ Controladores tipo Resource
+- ✅ Middleware personalizado para protección de rutas
+- ✅ Migraciones para todas las tablas
+- ✅ Seeders y Factories para datos de prueba
+- ✅ Separación de vistas (admin/client)
+- ✅ Componentes Blade reutilizables
+- ✅ Validación de datos en controladores
+- ✅ Soft deletes para usuarios (desactivación)
+
+## 🧪 Testing
+
+Para ejecutar los tests:
+
+```bash
+php artisan test
+```
+
+## 📦 Comandos Útiles
+
+```bash
+# Limpiar caché
+php artisan optimize:clear
+
+# Recompilar assets
+npm run build
+
+# Ejecutar migraciones
+php artisan migrate
+
+# Ejecutar seeders
+php artisan db:seed
+
+# Crear nuevo usuario desde tinker
+php artisan tinker
+>>> User::factory()->create()->assignRole('client');
+```
+
+## 🤝 Contribuir
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+### Convenciones de Commits
+
+- `feat`: Nueva funcionalidad
+- `fix`: Corrección de bug
+- `docs`: Documentación
+- `style`: Formato, estilos
+- `refactor`: Refactorización
+- `test`: Tests
+- `chore`: Mantenimiento
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## 👨‍💻 Autor
+
+**Jessica Rodriguez**
+
+- Email: jessica.rodriguez@tecdesoftware.com
+- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+
+## 🙏 Agradecimientos
+
+- Laravel Community
+- Spatie por el paquete de permisos
+- Todos los contribuidores de los paquetes utilizados
+
+---
+
+⭐ Si este proyecto te fue útil, considera darle una estrella en GitHub!

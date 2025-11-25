@@ -1,4 +1,4 @@
-<x-admin-layout title="Roles | MediConnect"
+<x-admin-layout title="Roles | Mundo Patitas"
     :breadcrumbs="[
         ['name' => 'Dashboard',
         'href' => route('admin.dashboard')
