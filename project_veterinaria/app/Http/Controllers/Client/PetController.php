@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class PetController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:client');
-    }
-
     /**
      * Display a listing of the user's pets.
      */

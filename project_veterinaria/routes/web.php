@@ -5,10 +5,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PetController as ClientPetController;
 use App\Http\Controllers\Client\ProfileController as ClientProfileController;
 
-Route::redirect('/', '/admin');
-//Route::get('/', function () {
-  //  return view('welcome');
-//});
+// Redirigir la raíz según el rol del usuario autenticado
+Route::get('/', function () {
+    if (auth()->check()) {
+        $user = auth()->user();
+        
+        // Redirigir según el rol del usuario
+        if ($user->hasRole('admin') || $user->hasRole('staff')) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->hasRole('client')) {
+            return redirect()->route('client.pets.index');
+        }
+        
+        // Si no tiene rol, redirigir al dashboard que manejará la redirección
+        return redirect()->route('dashboard');
+    }
+    
+    // Si no está autenticado, redirigir al login
+    return redirect()->route('login');
+});
 
 Route::middleware([
     'auth:sanctum',
