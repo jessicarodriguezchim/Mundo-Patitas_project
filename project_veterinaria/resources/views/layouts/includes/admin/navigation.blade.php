@@ -13,26 +13,37 @@
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-pastel-aqua">Mundo Patitas</span>
         </a>
       </div>
-      <!-- Settings Dropdown -->
-                <div class="ms-3 relative">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="size-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                                </button>
-                            @else
-                                <span class="inline-flex rounded-md">
-                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-soft text-pastel-gray-text bg-white hover:text-pastel-aqua hover:bg-pastel-aqua/10 focus:outline-none focus:bg-pastel-aqua/10 active:bg-pastel-aqua/20 transition-all ease-in-out duration-200">
-                                        {{ Auth::user()->name }}
-
-                                        <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                        </svg>
+      <!-- Botón de Salir y Settings Dropdown -->
+                <div class="flex items-center gap-3">
+                    <!-- Botón de Salir -->
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-soft hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200">
+                            <i class="ph ph-sign-out me-2 text-lg"></i>
+                            {{ __('Salir') }}
+                        </button>
+                    </form>
+                    
+                    <!-- Settings Dropdown -->
+                    <div class="relative">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                    <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                        <img class="size-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                     </button>
-                                </span>
-                            @endif
-                        </x-slot>
+                                @else
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-soft text-pastel-gray-text bg-white hover:text-pastel-aqua hover:bg-pastel-aqua/10 focus:outline-none focus:bg-pastel-aqua/10 active:bg-pastel-aqua/20 transition-all ease-in-out duration-200">
+                                            {{ Auth::user()->name }}
+
+                                            <svg class="ms-2 -me-0.5 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                @endif
+                            </x-slot>
 
                         <x-slot name="content">
                             <!-- Account Management -->

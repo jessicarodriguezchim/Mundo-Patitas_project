@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PetController as ClientPetController;
 use App\Http\Controllers\Client\ProfileController as ClientProfileController;
+use App\Http\Controllers\Auth\LogoutController;
 
 // Redirigir la raíz según el rol del usuario autenticado
 Route::get('/', function () {
@@ -24,6 +25,11 @@ Route::get('/', function () {
     // Si no está autenticado, redirigir al login
     return redirect()->route('login');
 });
+
+// Ruta personalizada de logout que redirige al login (debe estar antes de las rutas de Fortify)
+Route::post('/logout', LogoutController::class)
+    ->middleware(['web', 'auth'])
+    ->name('logout');
 
 Route::middleware([
     'auth:sanctum',
