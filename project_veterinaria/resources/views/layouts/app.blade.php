@@ -7,34 +7,28 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <!-- Phosphor Icons -->
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-        <!-- Styles -->
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-pastel-gray-light">
+        <div class="min-h-screen bg-pet-cream-50">
             @livewire('navigation-menu')
 
-            <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow-soft rounded-soft-lg">
+                <header class="bg-pet-cream-50 shadow-soft rounded-soft-lg border border-pet-orange-200/30">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
             @endif
 
-            <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>

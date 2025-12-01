@@ -1,3 +1,5 @@
+
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -45,14 +47,17 @@
                                         <dd class="mt-1 text-sm text-gray-900">{{ $user->address }}</dd>
                                     </div>
                                 @endif
+                                
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Rol</dt>
                                     <dd class="mt-1">
+                                        
                                         <span class="badge-pastel-aqua">
                                             {{ $user->roles->first()->name ?? 'Sin rol' }}
                                         </span>
                                     </dd>
                                 </div>
+                                
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Estado</dt>
                                     <dd class="mt-1">
@@ -61,6 +66,7 @@
                                                 Activo
                                             </span>
                                         @else
+                                            
                                             <span class="badge-pastel-pink">
                                                 Inactivo
                                             </span>

@@ -7,18 +7,13 @@
 
         <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://kit.fontawesome.com/33375f1763.js" crossorigin="anonymous"></script>
-        <!-- Phosphor Icons -->
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
-        {{-- SweetAlert2 --}}
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        {{-- Wire UI --}}
         <wireui:scripts />
         @livewireStyles
     </head>
@@ -45,7 +40,6 @@
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
-        {{-- Mostrar Sweet Alert --}}
         @if(session('swal'))
             <script>
                 Swal.fire(@json(session('swal')));

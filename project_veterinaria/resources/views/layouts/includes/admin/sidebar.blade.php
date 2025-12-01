@@ -1,5 +1,4 @@
 @php
-//Arreglo de íconos
 $links= [
  [
     'name' => 'Dashboard',
@@ -15,32 +14,30 @@ $links= [
     'icon' => 'fa-solid fa-paw',
     'href' => route('admin.pets.index'),
     'active' => request()->routeIs('admin.pets.*'),
-    'roles' => ['admin', 'staff'], // Solo admin y staff pueden ver mascotas
+    'roles' => ['admin', 'staff'],
  ],
  [
     'name' => 'Roles y Permisos',
     'icon' => 'fa-solid fa-shield-halved',
     'href' => route('admin.roles.index'),
     'active' => request()->routeIs('admin.roles.*'),
-    'roles' => ['admin'], // Solo admin puede ver roles
+    'roles' => ['admin'],
     ],
     [
         'name' => 'Usuarios',
         'icon' => 'fa-solid fa-users',
         'href' => route('admin.users.index'),
         'active' => request()->routeIs('admin.users.*'),
-        'roles' => ['admin'], // Solo admin puede ver usuarios
+        'roles' => ['admin'],
     ],
 ];
-
-// Filtrar links según el rol del usuario
 $userRoles = auth()->user()->roles->pluck('name')->toArray();
 $filteredLinks = array_filter($links, function($link) use ($userRoles) {
     if (isset($link['header'])) {
-        return true; // Siempre mostrar headers
+        return true;
     }
     if (!isset($link['roles'])) {
-        return true; // Si no tiene restricción de roles, mostrar siempre
+        return true;
     }
     return !empty(array_intersect($link['roles'], $userRoles));
 });
@@ -49,20 +46,20 @@ $filteredLinks = array_filter($links, function($link) use ($userRoles) {
 @endphp
  
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-pastel-aqua/30 sm:translate-x-0 shadow-soft"
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-pet-cream-50 border-r border-pet-orange-200/30 sm:translate-x-0 shadow-soft"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-pet-cream-50">
         <ul class="space-y-2 font-medium">
             @foreach ($filteredLinks as $link)
                 <li>
-                    {{--Revisa si existe definido una llave llamada 'header'--}}
+                    
                     @isset($link['header'])
-                        <div class="px-2 py-2 text-xs font-semibold text-pastel-gray-text uppercase">
+                        <div class="px-2 py-2 text-xs font-semibold text-pet-orange-700 uppercase">
                             {{ $link['header'] }}
                         </div>
-                    {{--Si no existe, usa la etiqueta como estaba definida antes--}}
+                    
                     @else
-                        {{--Revisa si existe definido una llave llamada 'submenu'--}}
+                        
                         @isset($link['submenu'])
                             <button type="button" class="flex items-center w-full p-2 text-base text-pastel-gray-text transition-all duration-200 rounded-soft group hover:bg-pastel-aqua/20 hover:text-pastel-aqua" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                 <span class="w-6 h-6 inline-flex justify-center items-center">

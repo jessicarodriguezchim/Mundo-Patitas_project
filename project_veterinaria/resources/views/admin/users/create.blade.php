@@ -1,3 +1,5 @@
+
+
 <x-admin-layout 
     title="Crear Usuario | Mundo Patitas"
     :breadcrumbs="[
@@ -8,12 +10,19 @@
     <div class="card-pastel">
         <h2 class="text-2xl font-bold text-pastel-aqua mb-6">Crear Nuevo Usuario</h2>
 
+        
+        
         <form action="{{ route('admin.users.store') }}" method="POST">
+            
             @csrf
 
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
                 <div>
                     <x-label for="name" value="Nombre Completo" />
+                    
+                    
                     <x-input 
                         id="name" 
                         name="name" 
@@ -23,6 +32,7 @@
                         required 
                         autofocus
                     />
+                    
                     @error('name')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -110,8 +120,11 @@
                     @enderror
                 </div>
 
+                
                 <div>
                     <x-label for="role" value="Rol" />
+                    
+                    
                     <select 
                         id="role" 
                         name="role" 
@@ -119,7 +132,9 @@
                         required
                     >
                         <option value="">Seleccione un rol</option>
+                        
                         @foreach($roles as $role)
+                            
                             <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
                                 {{ ucfirst($role->name) }}
                             </option>
@@ -130,8 +145,10 @@
                     @enderror
                 </div>
 
+                
                 <div class="flex items-center">
                     <label class="flex items-center">
+                        
                         <input 
                             type="checkbox" 
                             name="is_active" 

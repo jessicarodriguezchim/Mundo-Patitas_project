@@ -6,26 +6,56 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Seeder: UserSeeder
+ * 
+ * Este seeder crea usuarios de prueba en el sistema con diferentes roles.
+ * Es útil para desarrollo y testing, proporcionando cuentas listas para usar.
+ * 
+ * Usuarios creados:
+ * - 1 Administrador
+ * - 2 Personal (staff)
+ * - 2 Clientes activos
+ * - 1 Cliente inactivo (para pruebas de desactivación)
+ * 
+ * Todas las contraseñas son: 'password'
+ * 
+ * Uso: Se ejecuta automáticamente con php artisan db:seed
+ */
 class UserSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Ejecutar el seeder
+     * 
+     * Crea los usuarios de prueba con sus respectivos roles asignados.
+     * Cada usuario tiene datos de ejemplo para facilitar las pruebas.
      */
     public function run(): void
     {
-        // Usuario Admin
+        /**
+         * Usuario Administrador
+         * 
+         * Tiene acceso completo al sistema y puede gestionar usuarios,
+         * roles, y todas las funcionalidades administrativas.
+         */
         $admin = User::factory()->create([
             'name' => 'Jessica Rodriguez',
             'email' => 'admin@mundopatitas.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('password'),  // Contraseña: 'password'
             'id_number' => '123456789',
             'phone' => '5555555555',
             'address' => 'Calle 123, Colonia 456',
             'is_active' => true,
         ]);
+        // Asignar rol de administrador usando el método de Spatie Permission
         $admin->assignRole('admin');
 
-        // Usuario Staff (Empleado)
+        /**
+         * Usuarios Staff (Personal de la clínica)
+         * 
+         * Pueden gestionar mascotas pero no usuarios ni roles.
+         * Útiles para el personal que trabaja en la clínica.
+         */
         $staff1 = User::factory()->create([
             'name' => 'Carlos Méndez',
             'email' => 'staff1@mundopatitas.com',
@@ -48,7 +78,12 @@ class UserSeeder extends Seeder
         ]);
         $staff2->assignRole('staff');
 
-        // Usuarios Clientes
+        /**
+         * Usuarios Clientes (Dueños de mascotas)
+         * 
+         * Pueden ver sus propias mascotas y su perfil.
+         * No tienen acceso al panel administrativo.
+         */
         $client1 = User::factory()->create([
             'name' => 'Juan Pérez',
             'email' => 'client1@mundopatitas.com',
@@ -71,7 +106,14 @@ class UserSeeder extends Seeder
         ]);
         $client2->assignRole('client');
 
-        // Usuario cliente inactivo (para pruebas)
+        /**
+         * Usuario Cliente Inactivo (para pruebas)
+         * 
+         * Este usuario está marcado como inactivo (is_active = false).
+         * Útil para probar la funcionalidad de desactivación de usuarios
+         * y verificar que los usuarios inactivos no puedan iniciar sesión
+         * (si implementas esa validación).
+         */
         $clientInactive = User::factory()->create([
             'name' => 'Pedro Martínez',
             'email' => 'client.inactive@mundopatitas.com',
@@ -79,7 +121,7 @@ class UserSeeder extends Seeder
             'id_number' => '777888999',
             'phone' => '5555555560',
             'address' => 'Calle Oeste 123',
-            'is_active' => false,
+            'is_active' => false,  // Usuario inactivo
         ]);
         $clientInactive->assignRole('client');
     }

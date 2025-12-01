@@ -9,7 +9,7 @@
     display: none;
 }
 
-/* Estilos personalizados para paleta pastel tierna */
+/* Estilos personalizados para paleta cálida de mascotas */
 @layer components {
     /* Bordes redondeados suaves para todos los elementos */
     .rounded-soft {
@@ -20,53 +20,58 @@
         border-radius: 16px;
     }
     
-    /* Sombras suaves */
+    /* Sombras suaves con colores cálidos */
     .shadow-soft {
-        box-shadow: 0 2px 8px rgba(174, 230, 230, 0.15);
+        box-shadow: 0 2px 8px rgba(255, 122, 46, 0.15);
+    }
+    
+    .shadow-soft-green {
+        box-shadow: 0 2px 8px rgba(20, 184, 166, 0.15);
     }
     
     .shadow-soft-pink {
-        box-shadow: 0 2px 8px rgba(247, 200, 208, 0.15);
+        box-shadow: 0 2px 8px rgba(255, 156, 77, 0.15);
     }
     
     .shadow-soft-lg {
-        box-shadow: 0 4px 16px rgba(174, 230, 230, 0.12);
+        box-shadow: 0 4px 16px rgba(255, 122, 46, 0.12);
     }
     
-    /* Cards con estilo pastel */
+    /* Cards con estilo cálido */
     .card-pastel {
-        @apply bg-white rounded-soft-lg shadow-soft p-6;
-        border: 1px solid rgba(174, 230, 230, 0.2);
+        @apply bg-pet-cream-50 rounded-soft-lg shadow-soft p-6;
+        border: 1px solid rgba(255, 122, 46, 0.2);
     }
     
-    /* Inputs con estilo pastel */
+    /* Inputs con estilo cálido */
     .input-pastel {
         @apply rounded-soft shadow-soft;
-        border: 1px solid rgba(174, 230, 230, 0.3);
+        border: 1px solid rgba(255, 122, 46, 0.3);
+        background-color: #FFFEF9;
     }
     
     .input-pastel:focus {
-        border-color: #AEE6E6;
+        border-color: #FF7A2E;
         outline: none;
-        box-shadow: 0 0 0 3px rgba(174, 230, 230, 0.2);
+        box-shadow: 0 0 0 3px rgba(255, 122, 46, 0.2);
     }
     
-    /* Badges pastel */
+    /* Badges cálidos */
     .badge-pastel-aqua {
         @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-        background-color: rgba(174, 230, 230, 0.2);
-        color: #AEE6E6;
+        background-color: rgba(20, 184, 166, 0.2);
+        color: #0D9488;
     }
     
     .badge-pastel-pink {
         @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-        background-color: rgba(247, 200, 208, 0.2);
-        color: #F7C8D0;
+        background-color: rgba(255, 156, 77, 0.2);
+        color: #FF6B1A;
     }
     
     .badge-pastel-peach {
         @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-        background-color: rgba(255, 220, 194, 0.2);
-        color: #FFDCC2;
+        background-color: rgba(255, 184, 112, 0.2);
+        color: #E55A0F;
     }
 }

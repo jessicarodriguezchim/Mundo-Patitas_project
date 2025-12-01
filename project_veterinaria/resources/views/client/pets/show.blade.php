@@ -1,3 +1,5 @@
+
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -9,12 +11,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
+                    
                     <div class="mb-4">
                         <a href="{{ route('client.pets.index') }}" class="text-blue-600 hover:text-blue-900 mb-4 inline-block">
                             <i class="fa-solid fa-arrow-left mr-2"></i> Volver a mis mascotas
                         </a>
                     </div>
 
+                    
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ $pet->name }}</h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

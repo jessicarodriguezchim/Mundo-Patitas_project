@@ -1,3 +1,5 @@
+
+
 <x-admin-layout 
     title="Editar Usuario | Mundo Patitas"
     :breadcrumbs="[
@@ -8,8 +10,11 @@
     <div class="card-pastel">
         <h2 class="text-2xl font-bold text-pastel-aqua mb-6">Editar Usuario</h2>
 
+        
+        
         <form action="{{ route('admin.users.update', $user) }}" method="POST">
             @csrf
+            
             @method('PUT')
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -44,7 +49,9 @@
                     @enderror
                 </div>
 
+                
                 <div>
+                    
                     <x-label for="password" value="Nueva Contraseña (dejar vacío para no cambiar)" />
                     <x-input 
                         id="password" 
@@ -119,6 +126,9 @@
                     >
                         <option value="">Seleccione un rol</option>
                         @foreach($roles as $role)
+                            
+                            
+                            
                             <option value="{{ $role->name }}" {{ old('role', $user->roles->first()?->name) == $role->name ? 'selected' : '' }}>
                                 {{ ucfirst($role->name) }}
                             </option>

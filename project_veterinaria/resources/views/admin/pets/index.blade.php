@@ -39,10 +39,10 @@
                                 <a href="{{ route('admin.pets.edit', $pet) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">
                                     <i class="fa-solid fa-edit"></i>
                                 </a>
-                                <form action="{{ route('admin.pets.destroy', $pet) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de eliminar esta mascota?');">
+                                <form action="{{ route('admin.pets.destroy', $pet) }}" method="POST" class="inline" id="delete-pet-form-{{ $pet->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900">
+                                    <button type="button" onclick="confirmDeletePet({{ $pet->id }}, '{{ addslashes($pet->name) }}')" class="text-red-600 hover:text-red-900">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -62,5 +62,33 @@
             {{ $pets->links() }}
         </div>
     </div>
+    @once
+    <script>
+    if (typeof window.confirmDeletePet === 'undefined') {
+        window.confirmDeletePet = function(id, name) {
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: '¿Estás seguro de que deseas eliminar la mascota "' + name + '"? Esta acción no se puede deshacer.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-pet-form-' + id).submit();
+                    }
+                });
+            } else {
+                if (confirm('¿Estás seguro de que deseas eliminar la mascota "' + name + '"? Esta acción no se puede deshacer.')) {
+                    document.getElementById('delete-pet-form-' + id).submit();
+                }
+            }
+        };
+    }
+    </script>
+    @endonce
 </x-admin-layout>
 

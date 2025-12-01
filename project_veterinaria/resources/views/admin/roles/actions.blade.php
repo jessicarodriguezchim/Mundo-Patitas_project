@@ -10,7 +10,6 @@
         </button>
     </form>
 </div>
-
 @once
 <script>
 if (typeof window.confirmDeleteRole === 'undefined') {

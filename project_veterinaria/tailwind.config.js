@@ -58,18 +58,47 @@ export default {
             },
 
             colors: {
-
-                // Colores principales pastel
-                'pastel-aqua': '#AEE6E6',      // Aguamarina suave
-                'pastel-pink': '#F7C8D0',     // Rosa pastel
+                // Colores principales cálidos (inspirados en la app de mascotas)
+                'pet-orange': {
+                    50: '#FFF8F0',   // Crema muy claro
+                    100: '#FFE8D6',  // Crema claro
+                    200: '#FFD4A3',  // Melocotón muy claro
+                    300: '#FFB870',  // Melocotón claro
+                    400: '#FF9C4D',  // Naranja claro
+                    500: '#FF7A2E',  // Naranja principal
+                    600: '#FF6B1A',  // Naranja intenso
+                    700: '#E55A0F',  // Naranja oscuro
+                    800: '#CC4D0D',  // Naranja más oscuro
+                    900: '#B33F0A',  // Naranja muy oscuro
+                },
+                'pet-green': {
+                    50: '#F0FDFC',   // Verde muy claro
+                    100: '#CCFBF1',  // Verde claro
+                    200: '#99F6E4',  // Verde suave
+                    300: '#5EEAD4',  // Verde turquesa claro
+                    400: '#2DD4BF',  // Verde turquesa
+                    500: '#14B8A6',  // Verde principal
+                    600: '#0D9488',  // Verde intenso
+                    700: '#0F766E',  // Verde oscuro
+                    800: '#115E59',  // Verde más oscuro
+                    900: '#134E4A',  // Verde muy oscuro
+                },
+                'pet-cream': {
+                    50: '#FFFEF9',   // Blanco crema
+                    100: '#FFF8F0',  // Crema muy claro
+                    200: '#FFF2E1',  // Crema claro
+                    300: '#FFE8D6',  // Crema suave
+                    400: '#F5E6D3',  // Crema medio
+                    500: '#E8DCC8',  // Crema principal
+                },
                 
-                // Colores secundarios
-                'pastel-peach': '#FFDCC2',    // Melocotón suave
-                'pastel-yellow': '#FFF7AE',   // Amarillo pastel
-                
-                // Neutros
-                'pastel-gray-light': '#F4F4F4', // Gris muy claro
-                'pastel-gray-text': '#6F6F6F',  // Gris suave para texto
+                // Alias para compatibilidad
+                'pastel-aqua': '#5EEAD4',      // Verde turquesa claro
+                'pastel-pink': '#FF9C4D',     // Naranja claro
+                'pastel-peach': '#FFB870',    // Melocotón
+                'pastel-yellow': '#FFD4A3',   // Amarillo crema
+                'pastel-gray-light': '#FFFEF9', // Crema muy claro
+                'pastel-gray-text': '#6B7280',  // Gris suave para texto
             },
 
             borderRadius: {
@@ -80,9 +109,10 @@ export default {
 
             boxShadow: {
 
-                'soft': '0 2px 8px rgba(174, 230, 230, 0.15)',      // Sombra suave aguamarina
-                'soft-pink': '0 2px 8px rgba(247, 200, 208, 0.15)', // Sombra suave rosa
-                'soft-lg': '0 4px 16px rgba(174, 230, 230, 0.12)',  // Sombra suave grande
+                'soft': '0 2px 8px rgba(255, 122, 46, 0.15)',      // Sombra suave naranja
+                'soft-green': '0 2px 8px rgba(20, 184, 166, 0.15)', // Sombra suave verde
+                'soft-pink': '0 2px 8px rgba(255, 156, 77, 0.15)', // Sombra suave naranja claro
+                'soft-lg': '0 4px 16px rgba(255, 122, 46, 0.12)',  // Sombra suave grande
             },
 
         },

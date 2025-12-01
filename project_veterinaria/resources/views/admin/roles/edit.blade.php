@@ -1,3 +1,5 @@
+
+
 <x-admin-layout title="Roles | Mundo Patitas"
     :breadcrumbs="[
         ['name' => 'Dashboard',
@@ -10,6 +12,8 @@
         ]
     ]">
     <div class="bg-white rounded-lg shadow-md p-6">
+        
+        
         <form action="{{ route('admin.roles.update', $role) }}" method="POST">
             @csrf
             @method('PUT')

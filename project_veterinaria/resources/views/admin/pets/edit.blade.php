@@ -1,3 +1,5 @@
+
+
 <x-admin-layout 
     title="Editar Mascota | Sistema Veterinaria"
     :breadcrumbs="[
@@ -6,8 +8,11 @@
         ['name' => 'Editar'],
     ]">
     <div class="bg-white rounded-lg shadow-md p-6">
+        
+        
         <form action="{{ route('admin.pets.update', $pet) }}" method="POST">
             @csrf
+            
             @method('PUT')
 
             <div class="mb-4">
@@ -83,10 +88,12 @@
                         name="owner_search"
                         class="block w-full rounded-md border-gray-300 shadow-sm focus:border-pastel-aqua focus:ring-pastel-aqua input-pastel"
                         placeholder="Escribe el nombre, email o número de identificación del dueño..."
+                        
                         value="{{ old('owner_search', $pet->owner ? $pet->owner->name . ' (' . $pet->owner->email . ')' : '') }}"
                         autocomplete="off"
                         required
                     />
+                    
                     <input type="hidden" id="owner_id" name="owner_id" value="{{ old('owner_id', $pet->owner_id) }}" required>
                     <div id="owner_results" class="absolute z-10 w-full mt-1 bg-white border border-pastel-aqua/30 rounded-soft shadow-soft-lg hidden max-h-60 overflow-y-auto"></div>
                 </div>
@@ -128,32 +135,26 @@
             const ownerId = document.getElementById('owner_id');
             const ownerResults = document.getElementById('owner_results');
             let searchTimeout;
-
-            // Si hay un valor antiguo, cargar el usuario
             @if(old('owner_id'))
+                
                 const oldSearch = '{{ old("owner_search", $pet->owner ? $pet->owner->name . " (" . $pet->owner->email . ")" : "") }}';
                 if (oldSearch) {
                     ownerSearch.value = oldSearch;
                 }
             @elseif($pet->owner)
+                
                 ownerSearch.value = '{{ $pet->owner->name }} ({{ $pet->owner->email }})';
                 ownerId.value = {{ $pet->owner_id }};
             @endif
 
             ownerSearch.addEventListener('input', function() {
                 const query = this.value.trim();
-                
-                // Limpiar timeout anterior
                 clearTimeout(searchTimeout);
-                
-                // Ocultar resultados si la búsqueda es muy corta
                 if (query.length < 2) {
                     ownerResults.classList.add('hidden');
                     ownerId.value = '';
                     return;
                 }
-
-                // Esperar 300ms antes de buscar (debounce)
                 searchTimeout = setTimeout(() => {
                     fetch(`{{ url('/api/users/search') }}?q=${encodeURIComponent(query)}`, {
                         headers: {
@@ -197,15 +198,11 @@
                     });
                 }, 300);
             });
-
-            // Ocultar resultados al hacer clic fuera
             document.addEventListener('click', function(event) {
                 if (!ownerSearch.contains(event.target) && !ownerResults.contains(event.target)) {
                     ownerResults.classList.add('hidden');
                 }
             });
-
-            // Limpiar cuando se borra el campo
             ownerSearch.addEventListener('keydown', function(e) {
                 if (e.key === 'Backspace' && this.value.length === 0) {
                     ownerId.value = '';
